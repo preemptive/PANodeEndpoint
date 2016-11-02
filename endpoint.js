@@ -21,10 +21,12 @@ if (process.argv.length > 3) {
 }
 
 http.createServer(function(request,response){
-    console.log(request.headers);
     if (file != null) {
-        request.pipe(fs.createWriteStream(file, {'flags': 'a'}));
+        var stream = fs.createWriteStream(file, {'flags': 'a'});
+        stream.write(JSON.stringify(request.headers, null, 4)+'\n');
+        request.pipe(stream);
     } else {
+        console.log(request.headers);
         request.pipe(process.stdout);
     }
     response.writeHead(200, {
