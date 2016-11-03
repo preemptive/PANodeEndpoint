@@ -36,4 +36,4 @@ http.createServer(function(request,response){
     response.end();
 }).listen(port);
 
-console.log("Server Running on "+port);
+console.log("PANodeEndpoint(v1.0) running on "+port);
